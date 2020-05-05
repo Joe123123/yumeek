@@ -13,10 +13,10 @@ import MenuIcon from "@material-ui/icons/Menu";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 
-import Sidebar from "./Sidebar";
-import Home from "./Home";
-import Dashboard from "./dashboard";
-import Recipe from "./Recipe";
+import { Sidebar } from "./Sidebar";
+import { Home } from "./Home";
+import { Dashboard } from "./dashboard";
+import { Recipe } from "./Recipe";
 import useUserData from "../hooks/useUserData";
 import { SignupUser, LoginUser } from "./interfaces/User.interface";
 import { Recipes } from "./interfaces/Recipe.interface";
@@ -130,6 +130,7 @@ export const App: React.FC<Props> = ({ container }) => {
                 userLogin(user);
               }}
               userLogout={userLogout}
+              deleteRecipe={(recipe: Recipes): void => deleteRecipe(recipe)}
             />
           </Drawer>
         </Hidden>

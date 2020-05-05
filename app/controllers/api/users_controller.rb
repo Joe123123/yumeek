@@ -42,9 +42,6 @@ class Api::UsersController < ApplicationController
       group by weekday", params[:id]])
 
     render json: { data: @response }
-    # else
-    #   render :json => { :error => "Only owner can view the dashboard" }
-    # end
   end
 
   private

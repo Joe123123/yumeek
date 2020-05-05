@@ -5,6 +5,12 @@ import { Link } from "react-router-dom";
 import SavedRecipes from "./homepage/SavedRecipes";
 import { makeStyles } from "@material-ui/core/styles";
 import logo from "../assets/image/logo2.png";
+import { Recipes } from "./interfaces/Recipe.interface";
+import {
+  SessionUser,
+  SignupUser,
+  LoginUser,
+} from "./interfaces/User.interface";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -18,8 +24,17 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-// SavedRecipes, ShoppingList(Strech)
-export default function Sidebar(props) {
+// SavedRecipes
+interface Props {
+  savedRecipes: Recipes[];
+  sessionUser: SessionUser | null;
+  userSignup: (user: SignupUser) => void;
+  userLogin: (user: LoginUser) => void;
+  userLogout: () => void;
+  deleteRecipe: (recipe: Recipes) => void;
+}
+
+export const Sidebar: React.FC<Props> = (props) => {
   const {
     savedRecipes,
     sessionUser,
@@ -31,7 +46,7 @@ export default function Sidebar(props) {
   const classes = useStyles();
 
   return (
-    <div className={classes.container} >
+    <div className={classes.container}>
       <Link to="/">
         <img src={logo} alt="logo" className={classes.logo} />
       </Link>
@@ -45,4 +60,4 @@ export default function Sidebar(props) {
       {sessionUser && <DashboardButton sessionUser={sessionUser} />}
     </div>
   );
-}
+};

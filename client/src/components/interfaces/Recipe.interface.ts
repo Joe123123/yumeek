@@ -31,3 +31,13 @@ export interface FormattedRecipe {
     protein: number;
   };
 }
+
+export interface DashboardRecipe {
+  weekday: string;
+  energies: number;
+  carbs: number;
+  fat: number;
+  protein: number;
+  fiber: number;
+  recipe: Recipes;
+}
