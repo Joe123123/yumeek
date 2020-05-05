@@ -1,5 +1,5 @@
 export interface Recipes {
-  id: number;
+  id: number | null;
   carbs: number;
   energies: number;
   fat: number;

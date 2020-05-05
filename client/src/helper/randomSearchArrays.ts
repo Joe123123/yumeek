@@ -24,6 +24,6 @@ export const healthLabelList = [
   "sugar-conscious",
 ];
 
-export const random = (arr) => {
+export const random = (arr: string[]): string => {
   return arr[Math.floor(Math.random() * arr.length)];
 };
