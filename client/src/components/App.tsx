@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import clsx from "clsx";
 import { Switch, Route, BrowserRouter } from "react-router-dom";
 
-import { makeStyles, useTheme } from "@material-ui/core/styles";
+import { makeStyles, useTheme, Theme } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Drawer from "@material-ui/core/Drawer";
@@ -18,6 +18,8 @@ import Home from "./Home";
 import Dashboard from "./dashboard";
 import Recipe from "./Recipe";
 import useUserData from "../hooks/useUserData";
+import { SignupUser, LoginUser } from "./interfaces/User.interface";
+import Recipes from "./interfaces/Recipe.interface";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -55,16 +57,18 @@ const useStyles = makeStyles((theme) => ({
     overflow: "auto",
   },
   container: {
-    // paddingBottom: theme.spacing(4),
     backgroundColor: "#Fafafa",
   },
 }));
 
-export default function App(props) {
-  const { container } = props;
+interface Props {
+  container?: any;
+}
+
+export const App: React.FC<Props> = ({ container }) => {
   const classes = useStyles();
-  const theme = useTheme();
-  const [mobileOpen, setMobileOpen] = React.useState(false);
+  const theme = useTheme<Theme>();
+  const [mobileOpen, setMobileOpen] = useState<boolean>(false);
 
   const {
     savedRecipes,
@@ -76,7 +80,7 @@ export default function App(props) {
     handleAdd,
   } = useUserData();
 
-  const handleDrawerToggle = () => {
+  const handleDrawerToggle = (): void => {
     setMobileOpen(!mobileOpen);
   };
 
@@ -119,10 +123,10 @@ export default function App(props) {
             <Sidebar
               savedRecipes={savedRecipes}
               sessionUser={sessionUser}
-              userSignup={(user) => {
+              userSignup={(user: SignupUser): void => {
                 userSignup(user);
               }}
-              userLogin={(user) => {
+              userLogin={(user: LoginUser): void => {
                 userLogin(user);
               }}
               userLogout={userLogout}
@@ -141,10 +145,10 @@ export default function App(props) {
             <Sidebar
               savedRecipes={savedRecipes}
               sessionUser={sessionUser}
-              userSignup={(user) => userSignup(user)}
-              userLogin={(user) => userLogin(user)}
+              userSignup={(user: SignupUser): void => userSignup(user)}
+              userLogin={(user: LoginUser): void => userLogin(user)}
               userLogout={userLogout}
-              deleteRecipe={(recipe) => deleteRecipe(recipe)}
+              deleteRecipe={(recipe: Recipes): void => deleteRecipe(recipe)}
             />
           </Drawer>
         </Hidden>
@@ -156,7 +160,9 @@ export default function App(props) {
                 exact
                 path="/"
                 render={() => (
-                  <Home handleAdd={(recipe) => handleAdd(recipe)} />
+                  <Home
+                    handleAdd={(recipe: Recipes): void => handleAdd(recipe)}
+                  />
                 )}
               />
               <Route
@@ -165,9 +171,11 @@ export default function App(props) {
                 render={() => (
                   <Recipe
                     sessionUser={sessionUser}
-                    handleAdd={(recipe) => handleAdd(recipe)}
+                    handleAdd={(recipe: Recipes): void => handleAdd(recipe)}
                     savedRecipes={savedRecipes}
-                    deleteRecipe={(recipe) => deleteRecipe(recipe)}
+                    deleteRecipe={(recipe: Recipes): void =>
+                      deleteRecipe(recipe)
+                    }
                   />
                 )}
               />
@@ -177,4 +185,4 @@ export default function App(props) {
       </div>
     </BrowserRouter>
   );
-}
+};
