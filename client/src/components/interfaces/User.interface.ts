@@ -11,4 +11,10 @@ export interface LoginUser {
   password: string;
 }
 
-export interface SessionUser {}
+export interface SessionUser {
+  id: number;
+  first_name: string;
+  last_name: string;
+  email: string;
+  password: string;
+}

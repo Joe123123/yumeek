@@ -1,6 +1,26 @@
-const recipeFormatter = (recipe) => {
-  const obj = { recipe: {}, nutrients: {} };
-  obj.recipe.label = recipe.label;
+import {
+  FormattedRecipe,
+  Recipes,
+} from "../components/interfaces/Recipe.interface";
+
+const recipeFormatter = (recipe: Recipes) => {
+  const obj: FormattedRecipe = {
+    recipe: {
+      label: "",
+      steps: null,
+      img_url: "",
+      src_url: "",
+      health_labels: [],
+      ingredients: [],
+    },
+    nutrients: {
+      protein: 0,
+      fiber: 0,
+      carbs: 0,
+      fat: 0,
+      energies: 0,
+    },
+  };
   obj.recipe.label = recipe.label;
   obj.recipe.steps = recipe.steps;
   obj.recipe.img_url = recipe.img_url;

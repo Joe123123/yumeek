@@ -19,7 +19,7 @@ import Dashboard from "./dashboard";
 import Recipe from "./Recipe";
 import useUserData from "../hooks/useUserData";
 import { SignupUser, LoginUser } from "./interfaces/User.interface";
-import Recipes from "./interfaces/Recipe.interface";
+import { Recipes } from "./interfaces/Recipe.interface";
 
 const useStyles = makeStyles((theme) => ({
   root: {
