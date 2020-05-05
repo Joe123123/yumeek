@@ -7,13 +7,18 @@ import {
   healthLabelList,
   random,
 } from "../helper/randomSearchArrays";
+import { Recipes } from "../components/interfaces/Recipe.interface";
 
-const useSearchResult = () => {
-  const [searchResult, setSearchResult] = useState(
-    localStorage.getItem("searchResult")
+const useSearchResult = (): {
+  searchResult: Recipes[];
+  handleSearch: (value: string, tags: string[]) => void;
+  searchInfo: string[];
+} => {
+  const [searchResult, setSearchResult] = useState<string>(
+    localStorage.getItem("searchResult")!
   );
 
-  const [searchInfo, setSearchInfo] = useState([]);
+  const [searchInfo, setSearchInfo] = useState<string[]>([]);
 
   const appInfo = `&app_id=${process.env.REACT_APP_APP_ID}&app_key=${process.env.REACT_APP_APP_KEY}&from=0&to=100`;
   const apiBaseURL = `https://api.edamam.com/search?q=`;
@@ -37,9 +42,9 @@ const useSearchResult = () => {
     }
   }, []);
 
-  const handleSearch = (value, tags) => {
-    const tagsArr = [];
-    const infoArr = [];
+  const handleSearch = (value: string, tags: string[]) => {
+    const tagsArr: string[] = [];
+    const infoArr: string[] = [];
     for (let tag in tags) {
       tags[tag] && tagsArr.push(`health=${tag}`) && infoArr.push(tag);
     }
