@@ -11,14 +11,14 @@ import { Recipes } from "../components/interfaces/Recipe.interface";
 
 const useSearchResult = (): {
   searchResult: Recipes[];
-  handleSearch: (value: string, tags: string[]) => void;
-  searchInfo: string[];
+  handleSearch: (value: string, tags: { [key: string]: boolean }) => void;
+  searchInfo: string[] | null;
 } => {
   const [searchResult, setSearchResult] = useState<string>(
     localStorage.getItem("searchResult")!
   );
 
-  const [searchInfo, setSearchInfo] = useState<string[]>([]);
+  const [searchInfo, setSearchInfo] = useState<string[] | null>([]);
 
   const appInfo = `&app_id=${process.env.REACT_APP_APP_ID}&app_key=${process.env.REACT_APP_APP_KEY}&from=0&to=100`;
   const apiBaseURL = `https://api.edamam.com/search?q=`;
@@ -42,7 +42,7 @@ const useSearchResult = (): {
     }
   }, []);
 
-  const handleSearch = (value: string, tags: string[]) => {
+  const handleSearch = (value: string, tags: { [key: string]: boolean }) => {
     const tagsArr: string[] = [];
     const infoArr: string[] = [];
     for (let tag in tags) {
