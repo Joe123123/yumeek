@@ -1,26 +1,25 @@
 import React, { useEffect } from "react";
 import ItemTypes from "./ItemTypes";
-import SavedItem from "./SavedItem";
+import { SavedItem } from "./SavedItem";
 import { useDrop } from "react-dnd";
 
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Skeleton from "@material-ui/lab/Skeleton";
+import { Recipes, PutRecipe } from "../interfaces/Recipe.interface";
 
 const style = {
   marginRight: "1.5rem",
   marginBottom: "1.5rem",
   color: "#191A32",
   padding: "1rem",
-  textAlign: "center",
   fontSize: "1rem",
   lineHeight: "normal",
-  float: "left",
   width: "100%",
   minHeight: "400px",
   borderRadius: "10px",
 };
-function selectBackgroundColor(isActive, canDrop) {
+function selectBackgroundColor(isActive: boolean, canDrop: boolean): string {
   if (isActive) {
     return "#F17E75";
   } else if (canDrop) {
@@ -29,12 +28,18 @@ function selectBackgroundColor(isActive, canDrop) {
     return "#DCF3F3";
   }
 }
-export default function SavedList({
+
+interface Props {
+  recipeList: Recipes[];
+  weekorday: string;
+  handlePut: (item: PutRecipe) => void;
+}
+
+export const SavedList: React.FC<Props> = ({
   recipeList,
   weekorday,
   handlePut,
-  deleteRecipe,
-}) {
+}) => {
   useEffect(() => {
     if (recipeList) {
       console.log(recipeList);
@@ -43,10 +48,6 @@ export default function SavedList({
 
   const [{ canDrop, isOver }, drop] = useDrop({
     accept: ItemTypes.ADDED,
-    // drop: () => ({
-    //   name: `${allowedDropEffect} Dustbin`,
-    //   allowedDropEffect,
-    // }),
     collect: (monitor) => ({
       isOver: monitor.isOver(),
       canDrop: monitor.canDrop(),
@@ -58,7 +59,6 @@ export default function SavedList({
     <div ref={drop} style={{ ...style, backgroundColor }}>
       <Typography variant="h5">{`Saved Recipes`}</Typography>
       <br />
-      {/* {isActive ? "Release to drop" : "Drag a box here"} */}
       {recipeList ? (
         <Grid container spacing={1} direction="column">
           {recipeList.map((el) => {
@@ -68,7 +68,6 @@ export default function SavedList({
                   recipe={el}
                   weekorday={weekorday}
                   handlePut={handlePut}
-                  deleteRecipe={deleteRecipe}
                 />
               </Grid>
             );
@@ -79,4 +78,4 @@ export default function SavedList({
       )}
     </div>
   );
-}
+};

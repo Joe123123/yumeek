@@ -3,16 +3,12 @@ import { DndProvider } from "react-dnd";
 import Backend from "react-dnd-html5-backend";
 import Grid from "@material-ui/core/Grid";
 import { AddedList } from "./AddedList";
-import SavedList from "./SavedList";
+import { SavedList } from "./SavedList";
 
 import axios from "axios";
 
 import Skeleton from "@material-ui/lab/Skeleton";
-import {
-  Recipes,
-  DashboardRecipe,
-  PutRecipe,
-} from "../interfaces/Recipe.interface";
+import { Recipes, PutRecipe } from "../interfaces/Recipe.interface";
 
 interface Props {
   recipeList: Recipes[];
@@ -47,20 +43,6 @@ export const RecipeList: React.FC<Props> = (props) => {
     }
   }, [props]);
 
-  const deleteRecipe = (recipe: Recipes) => {
-    const newList = dayRecipleList.recipeList.filter(
-      (el) => el.id !== recipe.id
-    );
-    setDayRecipeList((prev) => ({
-      ...prev,
-      recipeList: newList,
-    }));
-
-    axios
-      .delete(`/api/recipe/${recipe.id}`, { data: recipe })
-      .catch((error) => console.log(error));
-  };
-
   return (
     <div>
       {props.recipeList ? (
@@ -73,7 +55,6 @@ export const RecipeList: React.FC<Props> = (props) => {
                 )}
                 weekorday={props.weekorday}
                 handlePut={props.handlePut}
-                deleteRecipe={deleteRecipe}
               ></SavedList>
             </Grid>
             <Grid item xs={5}>
@@ -86,7 +67,6 @@ export const RecipeList: React.FC<Props> = (props) => {
                   )}
                   weekorday={props.weekorday}
                   handlePut={props.handlePut}
-                  deleteRecipe={deleteRecipe}
                 ></AddedList>
               )}
             </Grid>

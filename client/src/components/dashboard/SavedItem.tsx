@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 
 import ItemTypes from "./ItemTypes";
-import { useDrag } from "react-dnd";
+import { useDrag, DragSourceMonitor } from "react-dnd";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 
@@ -13,9 +13,9 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Skeleton from "@material-ui/lab/Skeleton";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
-// import HighlightOffIcon from "@material-ui/icons/HighlightOff";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import Tooltip from "@material-ui/core/Tooltip";
+import { Recipes, PutRecipe } from "../interfaces/Recipe.interface";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -48,26 +48,33 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SavedItem({
+interface Props {
+  recipe: Recipes;
+  weekorday: string;
+  handlePut: (item: PutRecipe) => void;
+}
+
+export const SavedItem: React.FC<Props> = ({
   recipe,
   weekorday,
   handlePut,
-  deleteRecipe,
-}) {
+}) => {
   const classes = useStyles();
 
   const item = { recipe: recipe, type: ItemTypes.SAVED };
   let { userid } = useParams();
-  const [, drag] = useDrag({
+  const [, drag] = useDrag<
+    {
+      recipe: Recipes;
+      type: string;
+    },
+    PutRecipe,
+    DragSourceMonitor
+  >({
     item,
     end(item, monitor) {
       const dropResult = monitor.getDropResult();
       if (item && dropResult) {
-        // const isDropAllowed =
-        //   dropResult.allowedDropEffect === "any" ||
-        //   dropResult.allowedDropEffect === dropResult.dropEffect;
-
-        // if (isDropAllowed) {
         const recipeid = item.recipe.id;
         axios
           .put(`/api/userrecipe/${userid}/recipe/${recipeid}`, {
@@ -80,14 +87,13 @@ export default function SavedItem({
           .catch(function (error) {
             console.log(error);
           });
-        // }
       }
     },
   });
 
   let history = useHistory();
 
-  const handleRedirect = (recipe) => {
+  const handleRedirect = (recipe: Recipes): void => {
     history.push("/recipe", { recipe });
   };
 
@@ -99,16 +105,6 @@ export default function SavedItem({
         </CardContent>
 
         <div className={classes.controls}>
-          {/* <Tooltip title="Delete">
-            <IconButton
-              aria-label="delete"
-              onClick={() => {
-                deleteRecipe(recipe);
-              }}
-            >
-              <HighlightOffIcon className={classes.icon} />
-            </IconButton>
-          </Tooltip> */}
           <Tooltip title="Detail">
             <IconButton
               onClick={() => {
@@ -132,4 +128,4 @@ export default function SavedItem({
       )}
     </Card>
   );
-}
+};

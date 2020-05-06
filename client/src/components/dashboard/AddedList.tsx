@@ -36,14 +36,12 @@ interface Props {
   recipeList: Recipes[];
   weekorday: string;
   handlePut: (item: PutRecipe) => void;
-  deleteRecipe: (recipe: Recipes) => void;
 }
 
 export const AddedList: React.FC<Props> = ({
   recipeList,
   weekorday,
   handlePut,
-  deleteRecipe,
 }) => {
   const [{ canDrop, isOver }, drop] = useDrop({
     accept: ItemTypes.SAVED,
@@ -66,11 +64,7 @@ export const AddedList: React.FC<Props> = ({
             .map((el) => {
               return (
                 <Grid key={el.id} item xs={12}>
-                  <AddedItem
-                    recipe={el}
-                    handlePut={handlePut}
-                    deleteRecipe={deleteRecipe}
-                  />
+                  <AddedItem recipe={el} handlePut={handlePut} />
                 </Grid>
               );
             })}
