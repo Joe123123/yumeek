@@ -9,8 +9,8 @@ import Typography from "@material-ui/core/Typography";
 
 import { WeekChart } from "./WeekChart";
 import { DayChart } from "./DayChart";
-import RecipeList from "./RecipeList";
-import ButtonList from "./ButtonList";
+import { RecipeList } from "./RecipeList";
+import { ButtonList } from "./ButtonList";
 import { DashboardRecipe, Recipes } from "../interfaces/Recipe.interface";
 
 const useStyles = makeStyles((theme) => ({

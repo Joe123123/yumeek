@@ -13,7 +13,17 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ButtonList({ selectDay, selectWeek, selectOption }) {
+interface Props {
+  selectDay: (day: string) => void;
+  selectWeek: () => void;
+  selectOption: string;
+}
+
+export const ButtonList: React.FC<Props> = ({
+  selectDay,
+  selectWeek,
+  selectOption,
+}) => {
   const classes = useStyles();
 
   return (
@@ -79,4 +89,4 @@ export default function ButtonList({ selectDay, selectWeek, selectOption }) {
       <Divider />
     </div>
   );
-}
+};

@@ -8,9 +8,19 @@ import SavedList from "./SavedList";
 import axios from "axios";
 
 import Skeleton from "@material-ui/lab/Skeleton";
+import { Recipes, DashboardRecipe } from "../interfaces/Recipe.interface";
 
-export default function RecipeList(props) {
-  const [dayRecipleList, setDayRecipeList] = useState({
+interface Props {
+  recipeList: Recipes[];
+  weekorday: string;
+  handlePut: (item: DashboardRecipe) => void;
+}
+
+export const RecipeList: React.FC<Props> = (props) => {
+  const [dayRecipleList, setDayRecipeList] = useState<{
+    day: string;
+    recipeList: Recipes[];
+  }>({
     day: "",
     recipeList: [],
   });
@@ -28,12 +38,12 @@ export default function RecipeList(props) {
     if (props.weekorday) {
       setDayRecipeList((prev) => ({
         ...prev,
-        day: props.weekorday["weekday"],
+        day: props.weekorday,
       }));
     }
   }, [props]);
 
-  const deleteRecipe = (recipe) => {
+  const deleteRecipe = (recipe: Recipes) => {
     const newList = dayRecipleList.recipeList.filter(
       (el) => el.id !== recipe.id
     );
@@ -43,7 +53,7 @@ export default function RecipeList(props) {
     }));
 
     axios
-      .delete(`/api/recipe/${recipe.id}`, recipe)
+      .delete(`/api/recipe/${recipe.id}`, { data: recipe })
       .catch((error) => console.log(error));
   };
 
@@ -83,4 +93,4 @@ export default function RecipeList(props) {
       )}
     </div>
   );
-}
+};
