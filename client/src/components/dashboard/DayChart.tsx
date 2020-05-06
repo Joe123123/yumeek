@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import CircularBar from "./CicularBar";
+import { CircularBar } from "./CicularBar";
 import Grid from "@material-ui/core/Grid";
 import { DashboardRecipe } from "../interfaces/Recipe.interface";
 

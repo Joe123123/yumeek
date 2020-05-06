@@ -5,7 +5,13 @@ import {
 } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 
-export default function CircularBar(props) {
+interface Props {
+  text: number;
+  name: string;
+  amount: number;
+}
+
+export const CircularBar: React.FC<Props> = (props) => {
   const value = Math.round(props.text * 10000) / 100;
 
   return (
@@ -43,4 +49,4 @@ export default function CircularBar(props) {
       </CircularProgressbarWithChildren>
     </div>
   );
-}
+};
