@@ -1,7 +1,7 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 import { SearchBar } from "./homepage/SearchBar";
-import RecipesCardsLists from "./homepage/RecipesCardsLists";
+import { RecipesCardsLists } from "./homepage/RecipesCardsLists";
 import useSearchResult from "../hooks/useSearchResult";
 import { Recipes } from "./interfaces/Recipe.interface";
 
