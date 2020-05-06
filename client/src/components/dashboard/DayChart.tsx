@@ -1,8 +1,14 @@
 import React, { useState, useEffect } from "react";
 import CircularBar from "./CicularBar";
 import Grid from "@material-ui/core/Grid";
+import { DashboardRecipe } from "../interfaces/Recipe.interface";
 
-export default function DayChart(props) {
+interface Props {
+  chartRecipeData: DashboardRecipe[];
+  selectDay: string;
+}
+
+export const DayChart: React.FC<Props> = (props) => {
   const [data, setData] = useState({
     energies: 0,
     carbs: 0,
@@ -86,4 +92,4 @@ export default function DayChart(props) {
       )}
     </div>
   );
-}
+};

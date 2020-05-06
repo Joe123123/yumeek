@@ -13,8 +13,9 @@ import {
 } from "@devexpress/dx-react-chart-material-ui";
 
 import { Animation, ValueScale, Stack } from "@devexpress/dx-react-chart";
+import { DashboardRecipe } from "../interfaces/Recipe.interface";
 
-const Label = (symbol) => (props) => {
+const Label = (symbol: string) => (props: any) => {
   const { text } = props;
   return <ValueAxis.Label {...props} text={text + symbol} />;
 };
@@ -22,7 +23,7 @@ const Label = (symbol) => (props) => {
 const KCalLabel = Label(" kCal");
 const GramLabel = Label(" g");
 
-const modifyGramDomain = (domain) => [domain[0], 1000];
+const modifyGramDomain = (domain: ReadonlyArray<number>) => [domain[0], 1000];
 const modifyKCalDomain = () => [0, 10000];
 
 const useStyles = makeStyles((theme) => ({
@@ -32,7 +33,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function WeekChart(props) {
+interface Props {
+  chartRecipeData: DashboardRecipe[];
+}
+
+export const WeekChart: React.FC<Props> = (props) => {
   const { chartRecipeData } = props;
   const classes = useStyles();
 
@@ -105,4 +110,4 @@ export default function WeekChart(props) {
       )}
     </div>
   );
-}
+};

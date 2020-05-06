@@ -7,8 +7,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 
-import WeekChart from "./WeekChart";
-import DayChart from "./DayChart";
+import { WeekChart } from "./WeekChart";
+import { DayChart } from "./DayChart";
 import RecipeList from "./RecipeList";
 import ButtonList from "./ButtonList";
 import { DashboardRecipe, Recipes } from "../interfaces/Recipe.interface";
