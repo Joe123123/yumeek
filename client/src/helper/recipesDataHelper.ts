@@ -5,7 +5,7 @@ export default (response: any) => {
   const res: Recipes[] = [];
   for (let item of recipesArr) {
     const recipeObj = {
-      id: null,
+      id: undefined,
       steps: null,
       weekday: null,
       label: item.recipe.label,
