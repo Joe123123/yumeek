@@ -17,4 +17,5 @@ export interface SessionUser {
   last_name: string;
   email: string;
   password: string;
+  img_url: string;
 }

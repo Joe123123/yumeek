@@ -1,6 +1,6 @@
 import React from "react";
-import UserInfo from "./homepage/UserInfo";
-import DashboardButton from "./homepage/DashboardButton";
+import { UserInfo } from "./homepage/UserInfo";
+import { DashboardButton } from "./homepage/DashboardButton";
 import { Link } from "react-router-dom";
 import SavedRecipes from "./homepage/SavedRecipes";
 import { makeStyles } from "@material-ui/core/styles";
