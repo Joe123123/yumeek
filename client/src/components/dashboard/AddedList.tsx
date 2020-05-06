@@ -1,27 +1,28 @@
 import React from "react";
 import ItemTypes from "./ItemTypes";
-import AddedItem from "./AddedItem";
+import { AddedItem } from "./AddedItem";
 import { useDrop } from "react-dnd";
 
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Skeleton from "@material-ui/lab/Skeleton";
+import { Recipes, PutRecipe } from "../interfaces/Recipe.interface";
 
 const style = {
   marginRight: "1.5rem",
   marginBottom: "1.5rem",
   color: "#191A32",
   padding: "1rem",
-  textAlign: "center",
+  // textAlign: "center",
   fontSize: "1rem",
   lineHeight: "normal",
-  float: "left",
+  // float: "left",
   width: "100%",
   minHeight: "400px",
   top: "0",
   borderRadius: "10px",
 };
-function selectBackgroundColor(isActive, canDrop) {
+function selectBackgroundColor(isActive: boolean, canDrop: boolean): string {
   if (isActive) {
     return "#F17E75";
   } else if (canDrop) {
@@ -30,18 +31,22 @@ function selectBackgroundColor(isActive, canDrop) {
     return "#DCF3F3";
   }
 }
-export default function AddedList({
+
+interface Props {
+  recipeList: Recipes[];
+  weekorday: string;
+  handlePut: (item: PutRecipe) => void;
+  deleteRecipe: (recipe: Recipes) => void;
+}
+
+export const AddedList: React.FC<Props> = ({
   recipeList,
   weekorday,
   handlePut,
   deleteRecipe,
-}) {
+}) => {
   const [{ canDrop, isOver }, drop] = useDrop({
     accept: ItemTypes.SAVED,
-    // drop: () => ({
-    //   name: `${allowedDropEffect} Dustbin`,
-    //   allowedDropEffect,
-    // }),
     collect: (monitor) => ({
       isOver: monitor.isOver(),
       canDrop: monitor.canDrop(),
@@ -75,4 +80,4 @@ export default function AddedList({
       )}
     </div>
   );
-}
+};

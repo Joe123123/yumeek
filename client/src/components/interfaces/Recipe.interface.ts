@@ -1,5 +1,5 @@
 export interface Recipes {
-  id: number | null;
+  id: number | undefined;
   carbs: number;
   energies: number;
   fat: number;
@@ -40,4 +40,9 @@ export interface DashboardRecipe {
   protein: number;
   fiber: number;
   recipe: Recipes;
+}
+
+export interface PutRecipe {
+  recipe: Recipes;
+  type: string;
 }

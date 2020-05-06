@@ -99,7 +99,7 @@ export const Dashboard: React.FC = () => {
     setSelectOption(day);
   };
 
-  const handlePut = (item: DashboardRecipe): void => {
+  const handlePut = (item: { recipe: Recipes; type: string }): void => {
     const newList = recipeList.filter((el) => el.id !== item.recipe.id);
     newList.push(item.recipe);
     setRecipeList(newList);
