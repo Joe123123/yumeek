@@ -3,7 +3,7 @@ import { useLocation, useHistory } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import { Container, Button } from "@material-ui/core";
 
-import Labels from "./recipe_details_page/Labels";
+import { Labels } from "./recipe_details_page/Labels";
 import { IngredientsList } from "./recipe_details_page/IngredientsList";
 import SaveRecipeButton from "./recipe_details_page/SaveRecipeButton";
 import Nutrients from "./recipe_details_page/Nutrients";

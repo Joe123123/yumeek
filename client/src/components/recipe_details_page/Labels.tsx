@@ -30,7 +30,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Labels(props) {
+interface Props {
+  labels: string[];
+}
+
+export const Labels: React.FC<Props> = (props) => {
   const { labels } = props;
   const classes = useStyles();
   let src = "";
@@ -52,4 +56,4 @@ export default function Labels(props) {
       })}
     </section>
   );
-}
+};
