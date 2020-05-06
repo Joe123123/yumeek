@@ -7,6 +7,7 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
+import { Recipes } from "../interfaces/Recipe.interface";
 
 const useStyles = makeStyles({
   root: {
@@ -32,7 +33,13 @@ const useStyles = makeStyles({
   },
 });
 
-export default function RecipesCard(props) {
+interface Props {
+  recipe: Recipes;
+  handleAdd: (recipe: Recipes) => void;
+  clickRecipe: (recipe: Recipes) => void;
+}
+
+export const RecipesCard: React.FC<Props> = (props) => {
   const { recipe, handleAdd, clickRecipe } = props;
   const classes = useStyles();
 
@@ -68,4 +75,4 @@ export default function RecipesCard(props) {
       </CardActions>
     </Card>
   );
-}
+};

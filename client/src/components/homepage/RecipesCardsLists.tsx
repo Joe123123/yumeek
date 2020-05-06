@@ -4,7 +4,8 @@ import GridList from "@material-ui/core/GridList";
 import GridListTile from "@material-ui/core/GridListTile";
 import ListSubheader from "@material-ui/core/ListSubheader";
 
-import RecipesCard from "./RecipesCard";
+import { RecipesCard } from "./RecipesCard";
+import { Recipes } from "../interfaces/Recipe.interface";
 
 const useStyles = makeStyles((theme) => ({
   gridList: {
@@ -15,7 +16,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function RecipesCardsLists(props) {
+interface Props {
+  searchResultRecipes: Recipes[];
+  handleAdd: (recipe: Recipes) => void;
+  clickRecipe: (recipe: Recipes) => void;
+  searchInfo: string[] | null;
+}
+
+export const RecipesCardsLists: React.FC<Props> = (props) => {
   const { searchResultRecipes, handleAdd, clickRecipe, searchInfo } = props;
   const classes = useStyles();
 
@@ -26,7 +34,7 @@ export default function RecipesCardsLists(props) {
           <ListSubheader component="div">
             {searchResultRecipes &&
               `${searchResultRecipes.length} Recipes For You!  `}
-            {searchInfo.length !== 0 && `(${searchInfo.join(" + ")})`}
+            {searchInfo!.length !== 0 && `(${searchInfo!.join(" + ")})`}
           </ListSubheader>
         </GridListTile>
         {searchResultRecipes &&
@@ -41,4 +49,4 @@ export default function RecipesCardsLists(props) {
       </GridList>
     </div>
   );
-}
+};
