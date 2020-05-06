@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, Theme } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import FormGroup from "@material-ui/core/FormGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
@@ -12,7 +12,7 @@ import ingredientsArray from "../../helper/autoCompleteHelperArray";
 import Background from "../../assets/image/lemon-background.jpg";
 
 const useStyles = makeStyles(
-  (theme): Record<string, any> => ({
+  (theme: Theme): Record<string, any> => ({
     root: {
       flexGrow: 1,
       height: "500px",
