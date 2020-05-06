@@ -5,7 +5,7 @@ import { Container, Button } from "@material-ui/core";
 
 import { Labels } from "./recipe_details_page/Labels";
 import { IngredientsList } from "./recipe_details_page/IngredientsList";
-import SaveRecipeButton from "./recipe_details_page/SaveRecipeButton";
+import { SaveRecipeButton } from "./recipe_details_page/SaveRecipeButton";
 import { Nutrients } from "./recipe_details_page/Nutrients";
 import { RecipeInfo } from "./recipe_details_page/RecipeInfo";
 import { Recipes } from "./interfaces/Recipe.interface";
@@ -82,7 +82,6 @@ export const Recipe: React.FC<Props> = (props) => {
         recipe={location.state.recipe}
         savedRecipes={savedRecipes}
         deleteRecipe={deleteRecipe}
-        sessionUser={sessionUser}
       />
       <div className={classes.labels}>
         <Labels labels={location.state.recipe.health_labels} />
